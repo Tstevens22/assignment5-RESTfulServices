@@ -24,13 +24,12 @@
 </style>
 
 </h:head>
-<body>
+<h:body>
 	<h1>Response Page</h1>
 	<p>Hello #{user.firstName}, I hope you are doing well.</p>
-	<p>I believe your last name is #{user.lastName}</p>
 
-	<h:dataTable value="#{formController.service.orders}" var="o" styleClass="order-table"
-		headerClass="order-table-header"
+	<h:dataTable value="#{formController.service.orders}" var="o"
+		styleClass="order-table" headerClass="order-table-header"
 		rowClasses="order-table-odd , order-table-even">
 		<h:column>
 			<f:facet name="header">Order Number</f:facet>
@@ -49,5 +48,10 @@
 	#{o.quantity}
 	</h:column>
 	</h:dataTable>
-</body>
+	<br></br>
+	<h:commandButton type="submit" action="#{formController.onLogoff()}" value="Log Out"></h:commandButton>
+</h:body>
+
 </html>
+
+

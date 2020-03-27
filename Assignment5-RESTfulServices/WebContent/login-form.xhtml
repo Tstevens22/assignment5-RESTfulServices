@@ -4,23 +4,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head>
-
-	<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
-
-</h:head>
+<head></head>
 <body>
-
-	<ui:composition template="/layouts/commonLayout.xhtml">
-		<ui:define name="content">
-			<h:form>
-		First Name: <h:inputText value="#{user.firstName}" />
-		Last Name : <h:inputText value="#{user.lastName}" />
-				<h:commandButton action="#{formController.onSubmit()}"
-					value="Submit" />
-			</h:form>
-		</ui:define>
-	</ui:composition>
+	<div align="center">
+		<form method="post" action="j_security_check">
+			Username:<h:inputText id="j_username" autocomplete="off" /><br /> 
+			Password:<h:inputSecret id="j_password" autocomplete="off" /><br />
+			<h:commandButton type="submit" value="Submit" />
+		</form>
+	</div>
 
 </body>
 </html>

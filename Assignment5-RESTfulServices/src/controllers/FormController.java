@@ -1,12 +1,8 @@
 package controllers;
-
 import java.sql.*;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-
-import beans.User;
 import business.OrdersBusinessInterface;
 
 @ManagedBean
@@ -15,26 +11,15 @@ public class FormController {
 	@Inject
 	OrdersBusinessInterface services;
 
-	public String onSubmit() throws SQLException {
+	public String onLogoff() {
+		// Invalidate the Session to clear the security token
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
-		// captures the values from the input form
-		FacesContext context = FacesContext.getCurrentInstance();
-		User user = context.getApplication().evaluateExpressionGet(context, "#{user}", User.class);
+		System.out.println("You clikced the log out button");
 
-		services.test();
-
-		getAllOrders();
-
-		insertOrder();
-
-		getAllOrders();
-
-		// puts the user object into the Post request
-		FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("user", user);
-
-		// shows the content on the next page
-		return "ResponsePage.xhtml";
-
+		// Redirect to a protected page (so we get a full HTTP Request) to get Login
+		// Page
+		return "ResponsePage.xhtml?faces-redirect=true";
 	}
 
 	public OrdersBusinessInterface getService() {

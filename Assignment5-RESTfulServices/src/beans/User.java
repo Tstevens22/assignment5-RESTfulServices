@@ -1,6 +1,10 @@
 package beans;
 
+import java.security.Principal;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 public class User {
@@ -9,7 +13,7 @@ public class User {
 	private String lastName;
 
 	public User() {
-		
+
 		firstName = "Tre";
 		lastName = "Stevens";
 
@@ -29,6 +33,20 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	@PostConstruct
+	public void init() {
+		// Get the logged in Principle
+		Principal principle = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+		if (principle == null) {
+			setFirstName("Unknown");
+			setLastName("");
+		} else {
+			setFirstName(principle.getName());
+			setLastName("");
+		}
+
 	}
 
 }
